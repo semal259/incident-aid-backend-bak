@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Incidents</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Navigate</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Incident Aide System</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">CAD</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview</a></li>
+            <li><a href="incidents.htm">Reports</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+        </div>
+
+	<script>
+	getAllIncidents();
+
+	function getAllIncidents() {
+            $.get('http://107.170.238.227:3000/get_all_incidents', function (_incident) {
+            console.log('_incident', _incident);
+            $('#incidentList').empty();
+            if (_incident) {
+                _incident.forEach(function (_incident) {
+                    displayIncidents(_incident);
+                    });
+                }
+            }, 'json');
+        }
+
+	function getIncident(inc_name)
+        {
+            var temp = inc_name;
+            console.log(temp);
+        }
+	
+	
+	function displayIncidents(_incident) {
+ 	    $('#incidentList').append(
+       		 "<tr><td>"
+   	        .concat(_incident.incident_name).concat("</td><td>")
+	        .concat(_incident.start_time).concat("</td><td>")
+	        .concat(_incident.end_time).concat("</td><td>")
+	        .concat("</td><td><a href=\"print.html?incident=" + _incident.incident_name + "\">Show</a></td></tr>")
+//    	    	.concat(_event.ts).concat("</td><input type=\"button\" value=\"Show\" style= { background : \"#428bca\" } onClick=\"getIncident(" + _incident.incident_name + ")\"/></tr>")
+		
+		);
+	}
+	</script>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Incidents</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Incident Name</th>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="incidentList">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Incident Details</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <form>
+        <table width="100%">
+            <tr colspan="2"><td align="center"><h1>Incident Report</h1></td></tr>
+            <tr>
+                <td><b>Incident Name</b></td>
+                <td><label id="incident_name" /></td>
+            </tr>
+            <tr>
+                <td><b>Address</b></td>
+                <td><label id="incident_address" /></td>
+            </tr>
+            <tr>
+                <td><b>Start Time</b></td>
+                <td><label id="incident_starttime" /></td>
+            </tr>
+            <tr>
+                <td><b>End Time</b></td>
+                <td><label id="incident_endtime" /></td>
+            </tr>
+            <tr>
+                <td><b>Commander</b></td>
+                <td><label id="commander" /></td>
+            </tr>
+        </table>
+    </form>
+
+     <script>
+
+        function displayIncident(_incident) {
+            var addr = _incident.street + ", " + _incident.city + ", " + _incident.state + ", " + _incident.zip;
+             /*
+		    document.getElementById("incident_name").value = _incident.incident_name;
+		    document.getElementById("incident_address").value = addr;
+		    document.getElementById("incident_starttime").value = _incident.start_time;
+		    document.getElementById("incident_endtime").value = _incident.end_time;
+		    document.getElementById("commander").value = _incident.commander;
+            */
+            $('#incident_name').text(_incident.incident_name);
+            $('#incident_address').text(addr);
+            $('#incident_starttime').text(_incident.start_time);
+            $('#incident_endtime').text(_incident.end_time);
+            $('#commander').text(_incident.commander);
+        }
+	
+	function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            console.log('Query variable %s not found', variable);
+        }
+
+        function getIncidentDetails() {
+                
+	    //var data = {
+            var incident_name = getQueryVariable("incident");
+            console.log('incident');  
+            //};
+	    console.log(getQueryVariable("incident"));
+            console.log('incident_name: ', incident_name);
+            $.get('http://107.170.238.227:3000/get_incident_by_incident_name?incident='.concat(incident_name), function (_incident) {
+		console.log('_incident', _incident);
+                $('#incidentList').empty();
+                if (_incident) {
+                    //_incident.forEach(function (_incident) {
+                        displayIncident(_incident);
+                    //});
+                }
+            }, 'json');
+        }
+
+        getIncidentDetails();
+    </script>
+
+</body>
+</html>

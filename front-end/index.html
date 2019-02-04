@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Incident Aid System Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Navigate</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Incident Aide System</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">CAD</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview</a></li>
+            <li><a href="/incidents.html">Reports</a></li>
+            <li><a href="/analytics.html">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="pics/Mayday.png" class="img-responsive" alt="Generic placeholder thumbnail" id="Mayday">
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="pics/Par.png" class="img-responsive" alt="Generic placeholder thumbnail" id="Par">
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="pics/RescueInProg.png" class="img-responsive" alt="Generic placeholder thumbnail" id="RescueInProg">
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="pics/UtilitiesOff.png" class="img-responsive" alt="Generic placeholder thumbnail" id="UtilitiesOff">
+            </div>
+          </div>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="pics/UtilitiesOn.png" class="img-responsive" alt="Generic placeholder thumbnail" id="UtilitiesOn">
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="pics/Vacate.png" class="img-responsive" alt="Generic placeholder thumbnail" id="Vacate">
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="pics/VertVent.png" class="img-responsive" alt="Generic placeholder thumbnail" id="VertVent">
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="pics/CrossVent.png" class="img-responsive" alt="Generic placeholder thumbnail" id="CrossVent">
+            </div>
+          </div>
+
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="pics/AllClear.png" class="img-responsive" alt="Generic placeholder thumbnail" id="AllClear">
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="pics/LifeHaz.png" class="img-responsive" alt="Generic placeholder thumbnail" id="LifeHaz">
+            </div>
+          </div>
+
+          <script>
+            $("#Mayday").click(function() {
+              $.post('http://107.170.238.227:3000/twilio_send_sms', { 'alert': 'Mayday' });
+            });
+
+            $("#Par").click(function() {
+              $.post('http://107.170.238.227:3000/twilio_send_sms', { 'alert': 'Par' });
+            });
+
+            $("#RescueInProg").click(function() {
+              $.post('http://107.170.238.227:3000/twilio_send_sms', { 'alert': 'RescueInProg' });
+            });
+
+            $("#UtilitiesOff").click(function() {
+              $.post('http://107.170.238.227:3000/twilio_send_sms', { 'alert': 'UtilitiesOff' });
+            });
+
+            $("#UtilitiesOn").click(function() {
+              $.post('http://107.170.238.227:3000/twilio_send_sms', { 'alert': 'UtilitiesOn' });
+            });
+
+            $("#Vacate").click(function() {
+              $.post('http://107.170.238.227:3000/twilio_send_sms', { 'alert': 'Vacate' });
+            });
+
+            $("#VertVent").click(function() {
+              $.post('http://107.170.238.227:3000/twilio_send_sms', { 'alert': 'VertVent' });
+            });
+
+            $("#CrossVent").click(function() {
+              $.post('http://107.170.238.227:3000/twilio_send_sms', { 'alert': 'CrossVent' });
+            });
+
+            $("#AllClear").click(function() {
+              $.post('http://107.170.238.227:3000/twilio_send_sms', { 'alert': 'AllClear' });
+            });
+
+            $("#LifeHaz").click(function() {
+              $.post('http://107.170.238.227:3000/twilio_send_sms', { 'alert': 'LifeHaz' });
+            });
+
+            function convertType(_type) {
+              var type_hash = {
+                '0': 'REQ',
+                '1': 'REQ',
+                '2': 'ACK',
+                '3': 'COP'
+              };
+              try {
+                return type_hash[_type.toString()];
+              } catch(err) {
+                return 'REQ';
+              }
+            }
+
+            function convertMessage(_message) {
+              var message_hash = {
+                '1': 'Vacate',
+                '2': 'Mayday',
+                '3': 'Par',
+                '4': 'RescueInProg',
+                '5': 'UtilitiesOff',
+                '6': 'UtilitiesOn',
+                '7': 'VertVent',
+                '8': 'CrossVent',
+                '9': 'AllClear',
+                '10': 'LifeHaz'
+              };
+              try {
+                return message_hash[_message.toString()];
+              } catch(err) {
+                return 'Mayday';
+              }
+            }
+
+            function convertTimeStamp(_time_stamp) {
+              try {
+                var ts = Number(_time_stamp);
+                var date = new Date(ts);
+                return date.toString();
+              } catch(err) {
+                return _time_stamp;
+              }
+              return _time_stamp;
+            }
+
+            function determineColor(_message) {
+              var message_hash = {
+                '1': "red'>",
+                '2': "orange'>",
+                '3': "green'>",
+                '4': "purple'>",
+                '5': "yellow'>",
+                '6': "yellow'>",
+                '7': "blue'>",
+                '8': "blue'>",
+                '9': "green'>",
+                '10': "pink'>"
+              };
+              try {
+                return message_hash[_message.toString()];
+              } catch(err) {
+                return 'red';
+              }
+            }
+
+            function updateFeed(_event) {
+              $('#liveFeed').append(
+                 "<tr><td>"
+                .concat(_event.user_n).concat("</td><td>")
+                .concat(convertType(_event.tp)).concat("</td><td>")
+                .concat("<p style='background-color:").concat(determineColor(_event.m))
+                .concat(convertMessage(_event.m)).concat("</td><td>")
+                .concat("</p>").concat(_event.ts).concat("</td></tr>")
+                //.concat(convertTimeStamp(_event.ts)).concat("</td></tr>")
+                  
+              );
+            }
+
+            function retrieveNewEvents() {
+              $.get('http://107.170.238.227:3000/get_all_events', function(_events) {
+                console.log('_events', _events);
+              $('#liveFeed').empty();
+                if(_events) {
+                  _events.forEach(function(_event) {
+                    updateFeed(_event);
+                  });
+                }
+              }, 'json');
+            }
+
+            retrieveNewEvents();
+            setInterval(retrieveNewEvents, 5000);
+          </script>
+
+
+          <h2 class="sub-header">Live Event Feed</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Type</th>
+                  <th>Message</th>
+                  <th>TimeStamp</th>
+                </tr>
+              </thead>
+              <tbody id="liveFeed">
+              </tbody>
+            </table>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js">
+    </script>
+  </body>
+</html>
